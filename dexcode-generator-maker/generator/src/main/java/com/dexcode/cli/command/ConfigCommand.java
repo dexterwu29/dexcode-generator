@@ -1,7 +1,7 @@
 package com.dexcode.cli.command;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.dexcode.model.MainTemplateConfig;
+import com.dexcode.model.DataModel;
 import picocli.CommandLine.Command;
 
 import java.lang.reflect.Field;
@@ -13,12 +13,7 @@ public class ConfigCommand implements Runnable {
         // 实现config命令的逻辑
         System.out.println("查看参数信息");
 
-        // 反射方式1：JDK原生语法
-//        Class<?> myClass = MainTemplateConfig.class;
-//        Field[] fields = myClass.getDeclaredFields();
-
-        // 反射方式2：hutool反射工具类
-        Field[] fields = ReflectUtil.getFields(MainTemplateConfig.class);
+        Field[] fields = ReflectUtil.getFields(DataModel.class);
         // 打印每个字段的信息
         for (Field field : fields) {
             System.out.println("字段名称：" + field.getName());

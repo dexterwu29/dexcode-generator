@@ -1,38 +1,27 @@
-package com.dexcode.cli.util;
+package com.dexcode.cli.utils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import picocli.CommandLine.Option;
 
-public class ReflectArgs {
-    public String[] execute(String[] args) {
-        List<String> argumentList = new ArrayList<>(Arrays.asList(args));
-        checkOptionArgs(this, argumentList);
-        args = argumentList.toArray(new String[0]);
-        return args;
-    }
+public class OptionUtil {
 
-    private void checkOptionArgs(Object obj, List<String> argumentList) {
-        Class<?> clazz = obj.getClass();
+    public static String[] processInteractiveOptions(Class<?> clazz, String[] args) {
+        // 将传递过来的数组转成集合，方便添加
+        Set<String> argSet = new LinkedHashSet<>(Arrays.asList(args));
+
+        // 获取字段的Option注解
         for (Field field : clazz.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Option.class)) {
-                Option option = field.getAnnotation(Option.class);
-                if (option.interactive() && !isOptionPresent(argumentList, option.names())) {
-                    argumentList.add(option.names()[0]);
+            // 如果注解存在且其interactive属性为true，则执行以下操作
+            Option option = field.getAnnotation(Option.class);
+            if (option != null && option.interactive()) {
+                if (!argSet.contains(option.names()[0])) {
+                    argSet.add(option.names()[0]);
                 }
             }
         }
-    }
-
-    private boolean isOptionPresent(List<String> argumentList, String[] optionNames) {
-        for (String optionName : optionNames) {
-            if (argumentList.contains(optionName)) {
-                return true;
-            }
-        }
-        return false;
+        args = argSet.toArray(new String[0]);
+        return args;
     }
 }

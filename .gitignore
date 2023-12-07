@@ -1,9 +1,11 @@
 ### My Custom
+generated
 .idea
 target
 dexcode-generator.iml
 dexcode-generator-basic.iml
 dexcode-generator-demo-projects.iml
+dexcode-generator-maker.iml
 
 ### Java template
 # Compiled class file

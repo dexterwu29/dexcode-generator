@@ -18,11 +18,20 @@
 
 ## 二、学习进度记录
 
+### 第四期、制作工具开发
+
+当前目录说明：
+
+- `dexcode-generator-maker`目录下：`generator`下的`MainGenerator`用于生成制作工具，实现了生成代码生成器、打jar包、创建脚本工具等功能
+
+本期内容：
+
 ### 第三期、命令行开发
 
 当前目录说明：
 
-- `dexcode-generator-basic`目录下新增`cli`包，存放本期的Picocli示例代码、命令模式demo、代码生成器命令行开发代码
+- 元信息定义
+- 制作工具开发
 
 本期内容：
 
