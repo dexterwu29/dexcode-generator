@@ -1,4 +1,4 @@
-package com.dexcode.maker.generator;
+package com.dexcode.maker.generator.main;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
@@ -21,7 +21,7 @@ public class MainGenerator {
 
         // 输出的根路径
         String projectPath = System.getProperty("user.dir");
-        String outputPath = projectPath + File.separator + "generator";
+        String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
@@ -35,7 +35,7 @@ public class MainGenerator {
         String outputBasePackage = meta.getBasePackage();
         // com/dexcode
         String outputBasePackagePath = StrUtil.join("/", StrUtil.split(outputBasePackage, "."));
-        // generated/src/main/java/com/dexcode
+        // generated/acm-template-pro-generator/src/main/java/com/dexcode
         String outputBaseJavaPackagePath = outputPath + File.separator + "src/main/java" + File.separator + outputBasePackagePath;
 
         String inputFilePath;

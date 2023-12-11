@@ -2,7 +2,7 @@
 
 > 学习教程来源，程序员鱼皮的开源项目：https://github.com/liyupi/yuzi-generator
 >
-> 学习笔记分享在语雀知识库，目前只有编程导航知识星球的小伙伴可以查看：https://t.zsxq.com/14VRNBalG
+> 学习笔记分享在语雀知识库，目前只有编程导航知识星球的小伙伴可以查看：https://wx.zsxq.com/dweb2/index/footprint/841184212441112 
 >
 > 也欢迎互联网上的朋友们多提issue，大家一起交流进步！
 
@@ -22,16 +22,18 @@
 
 当前目录说明：
 
-- `dexcode-generator-maker`目录下：`generator`下的`MainGenerator`用于生成制作工具，实现了生成代码生成器、打jar包、创建脚本工具等功能
+- `dexcode-generator-maker`目录下：围绕`generator`下的`MainGenerator`，**制作生成**代码生成器**の工具**，并具备**一键**打jar包、创建脚本工具等功能
 
 本期内容：
+
+- 元信息定义（**双检锁**单例模式进行读取）
+- 制作工具开发
 
 ### 第三期、命令行开发
 
 当前目录说明：
 
-- 元信息定义
-- 制作工具开发
+- `dexcode-generator-basic`目录下新增`cli`包，存放本期的Picocli示例代码、命令模式demo、代码生成器命令行开发代码
 
 本期内容：
 

@@ -29,11 +29,11 @@ public class FileGenerator {
 
         inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
         outputPath = new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-    <#if fileInfo.generateType == "static">
+        <#if fileInfo.generateType == "static">
         StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
-    <#else >
+        <#else >
         DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
-    </#if>
-</#list>
+        </#if>
+    </#list>
     }
 }
