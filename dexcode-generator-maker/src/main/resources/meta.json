@@ -6,7 +6,8 @@
   "author": "dexter",
   "createTime": "2023-12-07",
   "fileConfig": {
-    "inputRootPath": "D:/Javap/yupi/dexcode-generator/dexcode-generator-demo-projects/acm-template-pro",
+    "sourceRootPath": "D:/Javap/yupi/dexcode-generator/dexcode-generator-demo-projects/acm-template-pro",
+    "inputRootPath": ".source/acm-template-pro",
     "outputRootPath": "generated",
     "type": "dir",
     "files": [
