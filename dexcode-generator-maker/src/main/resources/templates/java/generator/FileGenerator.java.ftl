@@ -8,6 +8,16 @@ import freemarker.template.TemplateException;
 import java.io.File;
 import java.io.IOException;
 
+<#macro generateFile indent fileInfo>
+${indent}inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
+${indent}outputPath = new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
+<#if fileInfo.generateType == "static">
+${indent}StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
+<#else >
+${indent}DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
+</#if>
+</#macro>
+
 /**
  * 核心生成器
  */
@@ -31,24 +41,28 @@ public class FileGenerator {
         ${modelInfo.type} ${modelInfo.fieldName} = model.${modelInfo.fieldName};
     </#list>
     <#list fileConfig.files as fileInfo>
+        <#if fileInfo.groupKey??>
 
         <#if fileInfo.condition??>
         if (${fileInfo.condition}) {
-            inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-            outputPath = new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-            <#if fileInfo.generateType == "static">
-            StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
-            <#else >
-            DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
-            </#if>
+            <#list fileInfo.files as fileInfo>
+
+            <@generateFile indent="            " fileInfo=fileInfo />
+            </#list>
         }
         <#else>
-        inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-        outputPath = new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-        <#if fileInfo.generateType == "static">
-        StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
-        <#else >
-        DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
+
+        <@generateFile indent="        " fileInfo=fileInfo />
+        </#if>
+        <#else>
+        <#if fileInfo.condition??>
+        if (${fileInfo.condition}) {
+
+            <@generateFile indent="            " fileInfo=fileInfo />
+        }
+        <#else>
+
+        <@generateFile indent="        " fileInfo=fileInfo />
         </#if>
         </#if>
     </#list>
