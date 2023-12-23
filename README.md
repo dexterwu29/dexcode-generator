@@ -18,6 +18,18 @@
 
 ## 二、学习进度记录
 
+### 第六期、配置能力增强
+
+当前目录说明（待改）：
+
+- `dexcode-generator-maker`目录下：围绕 `generator.MainGenerator`生成代码生成器的流程 和本期新建的`meta.MetaValidator` 元信息校验类，进行项目优化
+
+本期内容：
+
+- 生成目标 - Spring Boot模板项目介绍
+- 工具通用能力分析
+- 配置能力增强开发
+
 ### 第五期、制作工具优化
 
 当前目录说明：
