@@ -8,7 +8,6 @@ import com.dexcode.maker.meta.enums.FileGenerateTypeEnum;
 import com.dexcode.maker.meta.enums.FileTypeEnum;
 import com.dexcode.maker.meta.enums.ModelTypeEnum;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +33,7 @@ public class MetaValidator {
         for (Meta.ModelConfig.ModelInfo modelInfo : modelInfoList) {
             // 第六期，新增 groupKey，标记分组配置
             String groupKey = modelInfo.getGroupKey();
-            if (StrUtil.isNotEmpty(groupKey)){
+            if (StrUtil.isNotEmpty(groupKey)) {
                 // 生成中间参数
                 List<Meta.ModelConfig.ModelInfo> subModelInfoList = modelInfo.getModels();
                 String allArgsStr = modelInfo.getModels().stream()
@@ -93,7 +92,7 @@ public class MetaValidator {
         for (Meta.FileConfig.FileInfo fileInfo : fileInfoList) {
             // 第六期，新增 group 分组类别
             String type = fileInfo.getType();
-            if (FileTypeEnum.GROUP.getValue().equals(type)){
+            if (FileTypeEnum.GROUP.getValue().equals(type)) {
                 continue;
             }
 
