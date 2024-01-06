@@ -1,6 +1,5 @@
 package com.dexcode.maker.generator.file;
 
-import com.dexcode.maker.model.DataModel;
 import freemarker.template.TemplateException;
 
 import java.io.File;
@@ -10,13 +9,6 @@ import java.io.IOException;
  * 第二期の核心生成器
  */
 public class FileGenerator {
-    public static void main(String[] args) throws IOException, TemplateException {
-        DataModel dataModel = new DataModel();
-        dataModel.setAuthor("dexter");
-        dataModel.setLoop(false);
-        dataModel.setOutputText("最终の求和结果：");
-        doGenerate(dataModel);
-    }
 
     /**
      * 生成静态文件和动态文件
