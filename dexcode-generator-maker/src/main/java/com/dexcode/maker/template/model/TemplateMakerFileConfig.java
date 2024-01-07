@@ -13,6 +13,8 @@ public class TemplateMakerFileConfig {
 
     private List<FileInfoConfig> files;
 
+    private FileGroupConfig fileGroupConfig;
+
     @NoArgsConstructor
     @Data
     public static class FileInfoConfig {
@@ -26,5 +28,15 @@ public class TemplateMakerFileConfig {
          * 文件过滤配置
          */
         private List<FileFilterConfig> fileFilterConfigList;
+    }
+
+    @Data
+    public static class FileGroupConfig {
+
+        private String condition;
+
+        private String groupKey;
+
+        private String groupName;
     }
 }
