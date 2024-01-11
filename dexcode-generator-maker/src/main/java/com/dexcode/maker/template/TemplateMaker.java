@@ -10,21 +10,38 @@ import cn.hutool.json.JSONUtil;
 import com.dexcode.maker.meta.Meta;
 import com.dexcode.maker.meta.enums.FileGenerateTypeEnum;
 import com.dexcode.maker.meta.enums.FileTypeEnum;
-import com.dexcode.maker.template.enums.FileFilterRangeEnum;
-import com.dexcode.maker.template.enums.FileFilterRuleEnum;
-import com.dexcode.maker.template.model.FileFilterConfig;
+import com.dexcode.maker.template.model.TemplateMakerConfig;
 import com.dexcode.maker.template.model.TemplateMakerFileConfig;
 import com.dexcode.maker.template.model.TemplateMakerModelConfig;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * 第七期：模板制作工具
  */
 public class TemplateMaker {
+
+    /**
+     * 制作模板（重载方法）
+     *
+     * @param templateMakerConfig
+     * @return
+     */
+    public static long makeTemplate(TemplateMakerConfig templateMakerConfig) {
+        Meta meta = templateMakerConfig.getMeta();
+        Long id = templateMakerConfig.getId();
+        String originProjectPath = templateMakerConfig.getOriginProjectPath();
+        TemplateMakerFileConfig templateMakerFileConfig = templateMakerConfig.getFileConfig();
+        TemplateMakerModelConfig templateMakerModelConfig = templateMakerConfig.getModelConfig();
+
+        return makeTemplate(meta, id, originProjectPath, templateMakerFileConfig, templateMakerModelConfig);
+    }
 
     /**
      * 制作模板（分步能力制作）
@@ -241,87 +258,6 @@ public class TemplateMaker {
             FileUtil.writeUtf8String(newFileContent, fileOutputAbsolutePath);
         }
         return fileInfo;
-    }
-
-    public static void main(String[] args) {
-
-        Meta meta = new Meta();
-        meta.setName("acm-template-pro-generator");
-        meta.setDescription("ACM 示例模板生成器");
-
-        String projectPath = System.getProperty("user.dir");
-        String originProjectPath = new File(projectPath).getParent() + File.separator + "dexcode-generator-demo-projects/springboot-init";
-        String inputFilePath1 = "src/main/java/com/yupi/springbootinit/common";
-//        String inputFilePath2 = "src/main/java/com/yupi/springbootinit/constant";
-        String inputFilePath2 = "src/main/resources/application.yml";
-
-        // 模型参数信息（首次）
-//        Meta.ModelConfig.ModelInfo modelInfo = new Meta.ModelConfig.ModelInfo();
-//        modelInfo.setFieldName("outputText");
-//        modelInfo.setType("String");
-//        modelInfo.setDescription("mySum = ");
-
-        // 模型参数信息（第二次）
-        Meta.ModelConfig.ModelInfo modelInfo = new Meta.ModelConfig.ModelInfo();
-        modelInfo.setFieldName("className");
-        modelInfo.setType("String");
-
-        // 替换变量（首次）
-//        String searchStr = "Sum: ";
-
-        // 替换变量（第二次）
-        String searchStr = "BaseResponse";
-
-        // 文件过滤
-        TemplateMakerFileConfig templateMakerFileConfig = new TemplateMakerFileConfig();
-        TemplateMakerFileConfig.FileInfoConfig fileInfoConfig1 = new TemplateMakerFileConfig.FileInfoConfig();
-        fileInfoConfig1.setPath(inputFilePath1);
-        List<FileFilterConfig> fileFilterConfigList = new ArrayList<>();
-        FileFilterConfig fileFilterConfig = FileFilterConfig.builder()
-                .range(FileFilterRangeEnum.FILE_NAME.getValue())
-                .rule(FileFilterRuleEnum.CONTAINS.getValue())
-                .value("Base")
-                .build();
-        fileFilterConfigList.add(fileFilterConfig);
-        fileInfoConfig1.setFileFilterConfigList(fileFilterConfigList);
-
-        TemplateMakerFileConfig.FileInfoConfig fileInfoConfig2 = new TemplateMakerFileConfig.FileInfoConfig();
-        fileInfoConfig2.setPath(inputFilePath2);
-        templateMakerFileConfig.setFiles(Arrays.asList(fileInfoConfig1, fileInfoConfig2));
-
-        // 文件分组
-        TemplateMakerFileConfig.FileGroupConfig fileGroupConfig = new TemplateMakerFileConfig.FileGroupConfig();
-        fileGroupConfig.setCondition("outputText2");
-        fileGroupConfig.setGroupKey("test");
-        fileGroupConfig.setGroupName("测试分组2");
-        templateMakerFileConfig.setFileGroupConfig(fileGroupConfig);
-
-        // 模型分组
-        TemplateMakerModelConfig templateMakerModelConfig = new TemplateMakerModelConfig();
-        // - 模型组配置
-        TemplateMakerModelConfig.ModelGroupConfig modelGroupConfig = new TemplateMakerModelConfig.ModelGroupConfig();
-        modelGroupConfig.setGroupKey("mysql");
-        modelGroupConfig.setGroupName("数据库配置");
-        templateMakerModelConfig.setModelGroupConfig(modelGroupConfig);
-
-        // - 模型配置
-        TemplateMakerModelConfig.ModelInfoConfig modelInfoConfig1 = new TemplateMakerModelConfig.ModelInfoConfig();
-        modelInfoConfig1.setFieldName("url");
-        modelInfoConfig1.setType("String");
-        modelInfoConfig1.setDefaultValue("jdbc:mysql://localhost:3306/my_db");
-        modelInfoConfig1.setReplaceText("jdbc:mysql://localhost:3306/my_db");
-
-        TemplateMakerModelConfig.ModelInfoConfig modelInfoConfig2 = new TemplateMakerModelConfig.ModelInfoConfig();
-        modelInfoConfig2.setFieldName("username");
-        modelInfoConfig2.setType("String");
-        modelInfoConfig2.setDefaultValue("root");
-        modelInfoConfig2.setReplaceText("root");
-
-        List<TemplateMakerModelConfig.ModelInfoConfig> modelInfoConfigList = Arrays.asList(modelInfoConfig1, modelInfoConfig2);
-        templateMakerModelConfig.setModels(modelInfoConfigList);
-
-        long id = makeTemplate(meta, 1744696735504666624L, originProjectPath, templateMakerFileConfig, templateMakerModelConfig);
-        System.out.println(id);
     }
 
     /**

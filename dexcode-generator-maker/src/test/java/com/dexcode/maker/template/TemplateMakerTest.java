@@ -1,19 +1,15 @@
 package com.dexcode.maker.template;
 
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.json.JSONUtil;
 import com.dexcode.maker.meta.Meta;
-import com.dexcode.maker.template.enums.FileFilterRangeEnum;
-import com.dexcode.maker.template.enums.FileFilterRuleEnum;
-import com.dexcode.maker.template.model.FileFilterConfig;
+import com.dexcode.maker.template.model.TemplateMakerConfig;
 import com.dexcode.maker.template.model.TemplateMakerFileConfig;
 import com.dexcode.maker.template.model.TemplateMakerModelConfig;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class TemplateMakerTest {
 
@@ -77,6 +73,17 @@ public class TemplateMakerTest {
         templateMakerModelConfig.setModels(Arrays.asList(modelInfoConfig1));
 
         long id = TemplateMaker.makeTemplate(meta, 1744712881222180864L, originProjectPath, templateMakerFileConfig, templateMakerModelConfig);
+        System.out.println(id);
+    }
+
+    /**
+     * 使用 JSON 制作模板
+     */
+    @Test
+    public void testMakeTemplateWithJSON() {
+        String configStr = ResourceUtil.readUtf8Str("templateMaker.json");
+        TemplateMakerConfig templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        long id = TemplateMaker.makeTemplate(templateMakerConfig);
         System.out.println(id);
     }
 }
