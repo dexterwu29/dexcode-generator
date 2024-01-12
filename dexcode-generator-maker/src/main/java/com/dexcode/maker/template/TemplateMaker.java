@@ -167,13 +167,9 @@ public class TemplateMaker {
         // 如果是模型组
         TemplateMakerModelConfig.ModelGroupConfig modelGroupConfig = templateMakerModelConfig.getModelGroupConfig();
         if (modelGroupConfig != null) {
-            String condition = modelGroupConfig.getCondition();
-            String groupKey = modelGroupConfig.getGroupKey();
-            String groupName = modelGroupConfig.getGroupName();
+            // 复制变量
             Meta.ModelConfig.ModelInfo groupModelInfo = new Meta.ModelConfig.ModelInfo();
-            groupModelInfo.setGroupKey(groupKey);
-            groupModelInfo.setGroupName(groupName);
-            groupModelInfo.setCondition(condition);
+            BeanUtil.copyProperties(modelGroupConfig, groupModelInfo);
 
             // 模型全放到一个分组内
             groupModelInfo.setModels(inputModelInfoList);

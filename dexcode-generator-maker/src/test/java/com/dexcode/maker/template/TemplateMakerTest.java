@@ -92,20 +92,47 @@ public class TemplateMakerTest {
      */
     @Test
     public void makeSpringBootTemplate() {
+        // 0.项目基本信息
         String rootPath = "examples/springboot-init";
         String configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker.json");
         TemplateMakerConfig templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
         long id = TemplateMaker.makeTemplate(templateMakerConfig);
 
+        // 1.替换生成的代码包名
         configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker1.json");
         templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
         TemplateMaker.makeTemplate(templateMakerConfig);
 
+        // 2.是否生成帖子相关功能
         configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker2.json");
         templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
         TemplateMaker.makeTemplate(templateMakerConfig);
 
+        // 3.控制是否需要开启跨域控制
         configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker3.json");
+        templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        TemplateMaker.makeTemplate(templateMakerConfig);
+
+        // 4.自定义Knife4jConfig接口文档配置
+        configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker4.json");
+        templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        TemplateMaker.makeTemplate(templateMakerConfig);
+        configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker4_1.json");
+        templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        TemplateMaker.makeTemplate(templateMakerConfig);
+
+        // 5.自定义MySQL配置信息
+        configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker5.json");
+        templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        TemplateMaker.makeTemplate(templateMakerConfig);
+
+        // 6.控制是否开启Redis
+        configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker6.json");
+        templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
+        TemplateMaker.makeTemplate(templateMakerConfig);
+
+        // 7.控制是否开启Elasticsearch
+        configStr = ResourceUtil.readUtf8Str(rootPath + File.separator + "templateMaker7.json");
         templateMakerConfig = JSONUtil.toBean(configStr, TemplateMakerConfig.class);
         TemplateMaker.makeTemplate(templateMakerConfig);
         System.out.println(id);
