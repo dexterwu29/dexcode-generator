@@ -3,7 +3,7 @@
 # @from <a href="https://yupi.icu">编程导航知识星球</a>
 spring:
   application:
-    name: springboot-init
+    name: dexcode-generator-web-backend
   # 默认 dev 环境
   profiles:
     active: dev
@@ -21,9 +21,9 @@ spring:
   # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my_db
+    url: jdbc:mysql://localhost:3306/my_dexcode
     username: root
-    password: 123456
+    password: 123
   # Redis 配置
   # todo 需替换配置，然后取消注释
 #  redis:
@@ -45,7 +45,7 @@ spring:
       max-file-size: 10MB
 server:
   address: 0.0.0.0
-  port: 8101
+  port: 8120
   servlet:
     context-path: /api
     # cookie 30 天过期
@@ -94,10 +94,10 @@ cos:
 knife4j:
   enable: true
   openapi:
-    title: "接口文档"
+    title: "定制化代码生成器项目-接口文档"
     version: 1.0
     group:
       default:
         api-rule: package
         api-rule-resources:
-          - com.yupi.springbootinit.controller
+          - com.dexcode.web.controller
