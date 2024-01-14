@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import { userLogin } from '@/services/backend/userController';
+import { userLoginUsingPost } from '@/services/backend/userController';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
@@ -26,7 +26,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.UserLoginRequest) => {
     try {
       // 登录
-      const res = await userLogin({
+      const res = await userLoginUsingPost({
         ...values,
       });
 
@@ -64,9 +64,9 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" style={{ height: '100%' }} src="/logo.svg" />}
-          title="鱼皮前端万用模板"
-          subTitle={'快速开发属于自己的前端项目'}
+          logo={<img alt="logo" style={{ height: '100%' }} src="/logo.png" />}
+          title="Dex. Code 代码生成平台"
+          subTitle={'代码生成器在线制作分享，专属订制一触即发'}
           initialValues={{
             autoLogin: true,
           }}

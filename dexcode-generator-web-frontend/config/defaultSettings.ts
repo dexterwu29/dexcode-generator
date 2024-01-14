@@ -8,14 +8,14 @@ const Settings: ProLayoutProps & {
   logo?: string;
 } = {
   navTheme: 'light',
-  // 拂晓蓝
-  colorPrimary: '#1890ff',
-  layout: 'mix',
+  colorPrimary: '#08979c',
+  // 导航栏顶部
+  layout: 'top',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '鱼皮前端万用模板',
+  title: 'Dex. Code 代码生成平台',
   pwa: true,
   iconfontUrl: '',
   token: {
