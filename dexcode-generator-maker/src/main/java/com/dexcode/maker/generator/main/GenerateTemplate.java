@@ -3,6 +3,7 @@ package com.dexcode.maker.generator.main;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.ZipUtil;
 import com.dexcode.maker.generator.JarGenerator;
 import com.dexcode.maker.generator.ScriptGenerator;
 import com.dexcode.maker.generator.file.DynamicFileGenerator;
@@ -40,6 +41,22 @@ public abstract class GenerateTemplate {
 
         // 5.生成精简版的程序（产物包）
         buildDist(outputPath, sourceCopyDestPath, jarPath, shellOutputFilePath);
+
+        // 6.将产物包压缩…… 遵循开闭原则，不修改已有的代码
+    }
+
+    /**
+     * 制作压缩包
+     *
+     * @param outputPath
+     * @return
+     */
+    protected String buildZip(String outputPath) {
+        // 压缩包的路径
+        String zipPath = outputPath + ".zip";
+        // 压缩
+        ZipUtil.zip(outputPath, zipPath);
+        return zipPath;
     }
 
     /**
@@ -49,8 +66,9 @@ public abstract class GenerateTemplate {
      * @param sourceCopyDestPath
      * @param jarPath
      * @param shellOutputFilePath
+     * @return
      */
-    protected void buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String shellOutputFilePath) {
+    protected String buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String shellOutputFilePath) {
         String distOutputPath = outputPath + "-dist";
         //  - 拷贝jar包
         String targetAbsolutePath = distOutputPath + File.separator + "target";
@@ -62,6 +80,7 @@ public abstract class GenerateTemplate {
         FileUtil.copy(shellOutputFilePath + ".bat", distOutputPath, true);
         //  - 拷贝模板文件
         FileUtil.copy(sourceCopyDestPath, distOutputPath, true);
+        return distOutputPath;
     }
 
     /**

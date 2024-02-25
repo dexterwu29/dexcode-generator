@@ -3,10 +3,8 @@ generated
 .temp
 .idea
 target
-dexcode-generator.iml
-dexcode-generator-basic.iml
-dexcode-generator-demo-projects.iml
-dexcode-generator-maker.iml
+application-local.yml
+*.iml
 
 ### Java template
 # Compiled class file

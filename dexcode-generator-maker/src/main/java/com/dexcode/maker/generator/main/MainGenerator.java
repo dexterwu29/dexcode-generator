@@ -6,7 +6,8 @@ package com.dexcode.maker.generator.main;
 public class MainGenerator extends GenerateTemplate {
 
     @Override
-    protected void buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String shellOutputFilePath) {
+    protected String buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String shellOutputFilePath) {
         System.out.println("-- 不要生成精简版程序包啦！~~>_<~~");
+        return "";
     }
 }
